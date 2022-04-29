@@ -3,3 +3,15 @@
 body{
     background-color: rgb(173, 184, 172);
 }
+
+.quizArea{
+    display:none;
+}
+
+.gameEnd{
+    display:none;
+}
+
+.highScores{
+    display:none;
+}
