@@ -10,14 +10,15 @@
 </head>
 
 <body>
-
+    
     <div class="startArea">
         <p>Quiz Title</p>
         <button class="startbtn">START</button>
     </div>
-
+    
     <div class="quizArea">
-        <span class="timer"></span>
+        
+        <div id=“timer”>Time Left: <span id=“seconds”>60</span></div>
 
         <p class="question">QUESTION TEXT </p>
         <button class="answerbtn1">PH1</button>
@@ -28,16 +29,20 @@
     </div>
 
     <div class="gameEnd">
-        <p>PLACE HOLD</p>
+        <p>PLEASE ENTER YOUR INITIALS</p>
         <!-- Score display -->
-        <form class="intials">
-
-        </form>
+        <input class="initials" type="text">
+        </input>
+    <button class="initialSubmit">Submit initials</button>
     </div>
 
-    
-    
+
+
     <div class="highScores">
+        <h2>HIGHSCORES</h2>
+        <ul class="scoreBox">
+
+        </ul>
 
     </div>
 
