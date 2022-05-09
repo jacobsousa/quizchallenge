@@ -1,61 +1,110 @@
-var Questions=[
-    {
-        question:"What color is the sky?",
-        choices:["Green","Blue","Red","Yellow"],
-        answer:"Blue"
-    },
-    {
-        question:"What comes after three?",
-        choices:["one","two","five","four"],
-        answer:"four"
-    },
-    {
-        question:"What animal goes Moo?",
-        choices:["dog","cow","bird","cat"],
-        answer:"cow"
-    },
-    {
-        question:"Which is sweet?",
-        choices:["salt","sand","sardines","salt water taffy"],
-        answer:"salt water taffy"
-    },
-]
 
-var currentQuestion=0
+var playerInfo = {
+    points: 0,
+};
 
-//eventlistener for click on start button
-document.querySelector(".startbtn").addEventListener("click", function(){
-    document.querySelector(".quizArea").style.display="block"
-    document.querySelector(".startArea").style.display="none"
-    document.querySelector(".question").innerText=Questions[currentQuestion].question
+var Questions = [
+    {
+        question: "What color is the sky?",
+        choices: ["Green", "Blue", "Red", "Yellow"],
+        answer: "Blue",
+    },
+    {
+        question: "What comes after three?",
+        choices: ["one", "two", "five", "four"],
+        answer: "four",
+    },
+    {
+        question: "What animal goes Moo?",
+        choices: ["dog", "cow", "bird", "cat"],
+        answer: "cow",
+    },
+    {
+        question: "Which is sweet?",
+        choices: ["salt", "sand", "sardines", "salt water taffy"],
+        answer: "salt water taffy",
+    },
+];
+var currentQuestion = 0;
+function displayQuestion() {
+    if (currentQuestion >= Questions.length) {
+        return
+    }
+    document.querySelector(".question").innerText =
+        Questions[currentQuestion].question;
+    for (i = 1; i < 5; i++) {
+        document.querySelector(".answerbtn" + i).innerText =
+            Questions[currentQuestion].choices[i - 1];
 
-for(i=1; i<5; i++){
-    document.querySelector(".answerbtn"+i).innerText=Questions[currentQuestion].choices[i-1]
-    console.log(i)
-    // Question and buttons will be updated with current question
+
+    }
 
 }
-})
 
-for(i=1; i<5; i++){
-    document.querySelector(".answerbtn"+i).addEventListener("click", function(event){
-        console.log(event)
-        // 
+
+
+function start() {
+    document.querySelector(".startbtn").addEventListener("click", function () {
+        document.querySelector(".quizArea").style.display = "block";
+        document.querySelector(".startArea").style.display = "none";
+        displayQuestion()
+        
+        for (i = 1; i < 5; i++) {
+            document.querySelector(".answerbtn" + [i]).innerText =
+            Questions[currentQuestion].choices[i - 1];
+            
+            document
+            .querySelector(".answerbtn" + [i])
+            .addEventListener("click", function (event) {
+                console.log(event.target.innerText);
+                console.log(Questions[currentQuestion].answer);
+                if (
+                    (event.target.innerText === Questions[currentQuestion].answer)
+                    ) {
+                        //   console.log(event)
+                        playerInfo.points = playerInfo.points + 10;
+                        console.log(playerInfo.points);
+                    }
+                    currentQuestion++;
+                    if (currentQuestion < Questions.length) {
+                        displayQuestion()
+                        
+                    } else {
+                        document.querySelector(".quizArea").style.display = "none"
+                        document.querySelector(".gameEnd").style.display = "block"
+                    }
+                });
+            }
+        });
+        
+    }
+    
+    var remainingSeconds = 60;
+    var seconds = document.getElementById("seconds");
+    var timer = setInterval(function() {
+        if (remainingSeconds === 0) {
+            clearInterval(timer)
+            gameEnd();
+        }
+       seconds.innerText = remainingSeconds;
+       remainingSeconds--;
+    }, 1000)
+    
+    
+    
+    document.querySelector(".initialSubmit").addEventListener("click", function () {
+        document.querySelector(".gameEnd").style.display = "none";
+        document.querySelector(".highScores").style.display = "block";
+        var initial = document.querySelector(".initials").value;
+        var initials = document.createElement("li");
+        initials.textContent = initial;
+        document.querySelector(".scoreBox").appendChild(initials);
     })
 
-}
+// TAKE INPUT FROM HTML RETRIEVE VALUE APPEND TO A LIST
 
-//startbutton will activate 60 sec count down timer 
+// WAY TO CHECK ANSWERS 
 
-//startbutton will hide after clicked
-
-//the question(s) will appear with multiple choice answers
-
-//if statements for right & wrong answers 
-
-
-//time subtracted for wrong answers 
-
-//timer reaches zero or all questions answered game ends
-
-//player can add initials & save to local storage
+//   CLOSE QUIZ/ OPEN NEW VIEWPORT WITH FORM FOR ENTERING PLAYER INITIALS 
+// DISPLAY PLAYER HIGH SCORES 
+start();
