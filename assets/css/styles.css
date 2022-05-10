@@ -2,16 +2,20 @@
 
 body{
     background-color: rgb(173, 184, 172);
+    justify-content: center;
 }
 
 .quizArea{
     display:none;
+    justify-content: center;
 }
 
 .gameEnd{
     display:none;
+    justify-content: center ;
 }
 
 .highScores{
     display:none;
+    justify-content: center;
 }
