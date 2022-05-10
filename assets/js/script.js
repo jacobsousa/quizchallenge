@@ -41,6 +41,7 @@ function displayQuestion() {
 
 }
 
+var seconds = document.getElementById("seconds");
 
 
 function start() {
@@ -49,6 +50,17 @@ function start() {
         document.querySelector(".startArea").style.display = "none";
         displayQuestion()
         
+        var remainingSeconds = 60;
+        console.log(seconds)
+
+        var timer = setInterval(function() {
+            if (remainingSeconds === 0) {
+                clearInterval(timer)
+                gameEnd();
+            }
+            seconds.innerHTML = remainingSeconds;
+           remainingSeconds--;
+        }, 1000)
         for (i = 1; i < 5; i++) {
             document.querySelector(".answerbtn" + [i]).innerText =
             Questions[currentQuestion].choices[i - 1];
@@ -79,16 +91,6 @@ function start() {
         
     }
     
-    var remainingSeconds = 60;
-    var seconds = document.getElementById("seconds");
-    var timer = setInterval(function() {
-        if (remainingSeconds === 0) {
-            clearInterval(timer)
-            gameEnd();
-        }
-       seconds.innerText = remainingSeconds;
-       remainingSeconds--;
-    }, 1000)
     
     
     
@@ -101,10 +103,4 @@ function start() {
         document.querySelector(".scoreBox").appendChild(initials);
     })
 
-// TAKE INPUT FROM HTML RETRIEVE VALUE APPEND TO A LIST
-
-// WAY TO CHECK ANSWERS 
-
-//   CLOSE QUIZ/ OPEN NEW VIEWPORT WITH FORM FOR ENTERING PLAYER INITIALS 
-// DISPLAY PLAYER HIGH SCORES 
 start();
